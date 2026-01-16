@@ -229,20 +229,73 @@ const ProblemItem = ({ problem, onDelete, onStatusChange, index }) => {
   );
 };
 
+// Live Clock Component
+const LiveClock = () => {
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (date) => {
+    return date.toLocaleTimeString('en-US', { 
+      hour: '2-digit', 
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true 
+    });
+  };
+
+  const formatDate = (date) => {
+    return date.toLocaleDateString('en-US', { 
+      weekday: 'short', 
+      month: 'short', 
+      day: 'numeric' 
+    });
+  };
+
+  return (
+    <div className="live-clock">
+      <div className="clock-time">{formatTime(time)}</div>
+      <div className="clock-date">{formatDate(time)}</div>
+    </div>
+  );
+};
+
 // Progress Ring Component
-const ProgressRing = ({ completed, total }) => {
+const ProgressRing = ({ completed, total, pending, revising }) => {
   const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   return (
     <div className="progress-ring">
-      <div className="progress-text">{percentage}% Complete</div>
+      <div className="progress-stats">
+        <div className="stat-item">
+          <span className="stat-value">{total}</span>
+          <span className="stat-label">Total</span>
+        </div>
+        <div className="stat-item done">
+          <span className="stat-value">{completed}</span>
+          <span className="stat-label">Done</span>
+        </div>
+        <div className="stat-item pending">
+          <span className="stat-value">{pending}</span>
+          <span className="stat-label">Pending</span>
+        </div>
+        <div className="stat-item revise">
+          <span className="stat-value">{revising}</span>
+          <span className="stat-label">Revise</span>
+        </div>
+      </div>
       <div className="progress-bar-container">
         <motion.div 
           className="progress-bar-fill"
           initial={{ width: 0 }}
           animate={{ width: `${percentage}%` }}
           transition={{ duration: 1, ease: "easeOut" }}
-        />
+        >
+          <span className="progress-percentage">{percentage}%</span>
+        </motion.div>
       </div>
     </div>
   );
@@ -401,7 +454,15 @@ function App() {
             </div>
           </div>
           
-          <ProgressRing completed={completedCount} total={problems.length} />
+          <div className="header-right">
+            <LiveClock />
+            <ProgressRing 
+              completed={completedCount} 
+              total={problems.length}
+              pending={problems.filter(p => p.status === 'pending').length}
+              revising={problems.filter(p => p.status === 'revise').length}
+            />
+          </div>
         </motion.header>
 
         {/* Toolbar */}
