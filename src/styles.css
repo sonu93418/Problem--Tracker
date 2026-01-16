@@ -1407,6 +1407,23 @@ body {
   .input-row {
     grid-template-columns: 1fr;
   }
+
+  .header {
+    padding: 30px 24px;
+  }
+
+  .main-title {
+    font-size: 36px;
+  }
+
+  .header-logo {
+    width: 70px;
+    height: 70px;
+  }
+
+  .progress-ring {
+    min-width: 250px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1416,33 +1433,155 @@ body {
   
   .header {
     flex-direction: column;
-    gap: 20px;
-    padding: 24px;
+    gap: 24px;
+    padding: 24px 20px;
+    align-items: stretch;
   }
   
   .header-left {
     width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .header-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .header-content {
+    flex: 1;
   }
   
-  .app-title {
-    font-size: 26px;
+  .main-title {
+    font-size: 28px;
+    letter-spacing: -0.5px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .header-right {
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .live-clock {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    padding: 12px 16px;
+  }
+
+  .clock-time {
+    font-size: 20px;
+  }
+
+  .clock-date {
+    font-size: 11px;
+  }
+
+  .progress-ring {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .progress-stats {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  .stat-value {
+    font-size: 18px;
+  }
+
+  .stat-label {
+    font-size: 9px;
+  }
+
+  .progress-bar-container {
+    height: 24px;
+  }
+
+  .progress-percentage {
+    font-size: 11px;
+    padding-right: 8px;
   }
   
   .toolbar {
     flex-direction: column;
+    padding: 16px;
   }
   
   .search-bar {
     width: 100%;
   }
-  
-  .actions {
-    flex-direction: column;
+
+  .filter-dropdown,
+  .sort-dropdown {
+    width: 100%;
   }
   
+  .button-column {
+    width: 100%;
+  }
+
   .action-btn {
     width: 100%;
+  }
+
+  .panel {
+    padding: 20px;
+  }
+
+  .panel-title {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 20px 16px;
+  }
+
+  .header-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .header-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .main-title {
+    font-size: 24px;
+  }
+
+  .subtitle {
+    font-size: 11px;
+  }
+
+  .progress-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .stat-item {
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+  }
+
+  .problem-item {
+    padding: 16px;
+  }
+
+  .problem-title {
+    font-size: 15px;
   }
 }
