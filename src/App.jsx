@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import logo from './logo.svg';
 
 // SVG Icons
 const Icons = {
@@ -231,37 +232,18 @@ const ProblemItem = ({ problem, onDelete, onStatusChange, index }) => {
 // Progress Ring Component
 const ProgressRing = ({ completed, total }) => {
   const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
-  const circumference = 2 * Math.PI * 28;
-  const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   return (
     <div className="progress-ring">
-      <svg width="64" height="64" viewBox="0 0 64 64">
-        <defs>
-          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="var(--color-neon-cyan)" />
-            <stop offset="50%" stopColor="var(--color-neon-purple)" />
-            <stop offset="100%" stopColor="var(--color-neon-green)" />
-          </linearGradient>
-        </defs>
-        <circle
-          className="background"
-          cx="32"
-          cy="32"
-          r="28"
-        />
-        <motion.circle
-          className="foreground"
-          cx="32"
-          cy="32"
-          r="28"
-          strokeDasharray={`${circumference} ${circumference}`}
-          initial={{ strokeDashoffset: circumference }}
-          animate={{ strokeDashoffset }}
+      <div className="progress-text">{percentage}% Complete</div>
+      <div className="progress-bar-container">
+        <motion.div 
+          className="progress-bar-fill"
+          initial={{ width: 0 }}
+          animate={{ width: `${percentage}%` }}
           transition={{ duration: 1, ease: "easeOut" }}
         />
-      </svg>
-      <div className="progress-text">{percentage}%</div>
+      </div>
     </div>
   );
 };
@@ -409,12 +391,14 @@ function App() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="header-content">
-            <div className="title-section">
-              <span className="title-icon"><Icons.Rocket /></span>
-              <h1 className="main-title">Problem Tracker</h1>
+          <div className="header-left">
+            <img src={logo} alt="Problem Tracker" className="header-logo" />
+            <div className="header-content">
+              <div className="title-section">
+                <h1 className="main-title">Problem Tracker</h1>
+              </div>
+              <p className="subtitle">Track problems • Save links • Revise faster</p>
             </div>
-            <p className="subtitle">Track problems • Save links • Revise faster</p>
           </div>
           
           <ProgressRing completed={completedCount} total={problems.length} />
@@ -502,7 +486,7 @@ function App() {
             </div>
           </div>
 
-          <div className="button-row">
+          <div className="button-column">
             <button
               className="action-btn primary"
               onClick={addProblem}

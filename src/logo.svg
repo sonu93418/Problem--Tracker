@@ -1,0 +1,42 @@
+<svg width="120" height="120" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bug body -->
+  <g id="bug">
+    <!-- Legs -->
+    <path d="M150 180 L100 220" stroke="#1565C0" stroke-width="12" stroke-linecap="round" fill="none"/>
+    <path d="M150 180 L200 220" stroke="#1565C0" stroke-width="12" stroke-linecap="round" fill="none"/>
+    <path d="M130 140 L70 140" stroke="#1565C0" stroke-width="12" stroke-linecap="round" fill="none"/>
+    <path d="M170 140 L230 140" stroke="#1565C0" stroke-width="12" stroke-linecap="round" fill="none"/>
+    <path d="M150 80 L100 40" stroke="#1565C0" stroke-width="12" stroke-linecap="round" fill="none"/>
+    <path d="M150 80 L200 40" stroke="#1565C0" stroke-width="12" stroke-linecap="round" fill="none"/>
+    
+    <!-- Body circle -->
+    <circle cx="150" cy="140" r="70" fill="#0288D1"/>
+    <circle cx="150" cy="140" r="70" fill="url(#blueGradient)"/>
+    
+    <!-- Head -->
+    <circle cx="150" cy="80" r="40" fill="#1976D2"/>
+    
+    <!-- Checkmark -->
+    <g id="checkmark">
+      <path d="M120 140 L140 160 L180 110" stroke="#76FF03" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M120 140 L140 160 L180 110" stroke="#4CAF50" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+    
+    <!-- Eyes -->
+    <circle cx="135" cy="75" r="6" fill="white"/>
+    <circle cx="165" cy="75" r="6" fill="white"/>
+    
+    <!-- Antennae -->
+    <line x1="135" y1="50" x2="125" y2="30" stroke="#1565C0" stroke-width="8" stroke-linecap="round"/>
+    <line x1="165" y1="50" x2="175" y2="30" stroke="#1565C0" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="125" cy="30" r="8" fill="#00BCD4"/>
+    <circle cx="175" cy="30" r="8" fill="#00BCD4"/>
+  </g>
+  
+  <defs>
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#42A5F5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1565C0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>
