@@ -181,13 +181,19 @@ const ProblemItem = ({ problem, onDelete, onStatusChange, index }) => {
     >
       <div className="problem-header">
         <div className="problem-title-section">
-          <span 
-            className="platform-badge" 
-            style={{ background: platformColors[problem.platform] || '#666' }}
-          >
-            {problem.platform}
-          </span>
           <h4 className="problem-title">{problem.name}</h4>
+          <div className="problem-badges">
+            <span 
+              className="platform-badge" 
+              style={{ background: platformColors[problem.platform] || '#666' }}
+            >
+              {problem.platform}
+            </span>
+            <span className="problem-date">
+              <Icons.Calendar />
+              {problem.date}
+            </span>
+          </div>
         </div>
         <button
           className="delete-icon"
@@ -199,22 +205,16 @@ const ProblemItem = ({ problem, onDelete, onStatusChange, index }) => {
       </div>
       
       <div className="problem-footer">
-        <div className="problem-meta">
-          <span className="problem-date">
-            <Icons.Calendar />
-            <span>{problem.date}</span>
-          </span>
-          <select
-            className="status-tag"
-            value={problem.status}
-            onChange={(e) => onStatusChange(problem.id, e.target.value)}
-            style={{ background: statusConfig[problem.status].color }}
-          >
-            <option value="pending">{statusConfig.pending.label}</option>
-            <option value="done">{statusConfig.done.label}</option>
-            <option value="revise">{statusConfig.revise.label}</option>
-          </select>
-        </div>
+        <select
+          className="status-tag"
+          value={problem.status}
+          onChange={(e) => onStatusChange(problem.id, e.target.value)}
+          style={{ background: statusConfig[problem.status].color }}
+        >
+          <option value="pending">{statusConfig.pending.label}</option>
+          <option value="done">{statusConfig.done.label}</option>
+          <option value="revise">{statusConfig.revise.label}</option>
+        </select>
         <a
           href={problem.url}
           target="_blank"
@@ -222,7 +222,7 @@ const ProblemItem = ({ problem, onDelete, onStatusChange, index }) => {
           className="open-link-btn"
         >
           <Icons.ExternalLink />
-          <span>Open</span>
+          <span>Open Problem</span>
         </a>
       </div>
     </motion.div>
@@ -306,7 +306,7 @@ function App() {
   const [questionName, setQuestionName] = useState('');
   const [questionUrl, setQuestionUrl] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterStatus, setFilterStatus] = useState('all');
+  const [filterStatus, setFilterStatus] = useState('pending');
   const [sortBy, setSortBy] = useState('newest');
   const [theme, setTheme] = useState('dark');
 
@@ -415,9 +415,7 @@ function App() {
     }
 
     // Filter by status
-    if (filterStatus !== 'all') {
-      filtered = filtered.filter(p => p.status === filterStatus);
-    }
+    filtered = filtered.filter(p => p.status === filterStatus);
 
     // Sort
     if (sortBy === 'oldest') {
@@ -487,7 +485,6 @@ function App() {
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
           >
-            <option value="all">All Status</option>
             <option value="pending">Pending</option>
             <option value="done">Done</option>
             <option value="revise">Revise</option>
